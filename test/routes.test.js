@@ -37,7 +37,7 @@ describe('POST /auth/login', function() {
 describe('GET /auth/me', function() {
     var auth = {};
     before(loginUser(auth));
-    
+   
     it('should return user json', (done) => {
         request(app)
         .get('/auth/me')

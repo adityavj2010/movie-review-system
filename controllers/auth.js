@@ -16,7 +16,6 @@ function login(req, res) {
             const user = response[0];
             
             const passwordInput = Hash(req.body.password, config.appSecret).toString();
-            
             if(user.password !== passwordInput){
                 res.status(401).send({error: 'Unauthorized', message : 'Authentication failed'});
             } else {

@@ -12,4 +12,4 @@ CREATE TABLE `users` (
 );
 
 INSERT INTO users (`username`, `first_name`, `last_name`, `email`, `enabled`, `password`)
-VALUES ('admin', 'first', 'last', 'admin@admin.com', 1, 'eae4dab389612ebd68ed6f4b872ae41d');
+VALUES ('admin', 'first', 'last', 'admin@admin.com', 1, '6b01662363de75db60a625edcee73a8e');
