@@ -13,9 +13,6 @@ describe('Comments CRUD', function () {
             .set('Authorization', auth.token)
             .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
             .end((err, res) => {
-                console.log(res.body)
-                // console.log('API RES',res.body)
-                // if (err) return done(err);
                 done();
             });
     });
@@ -30,7 +27,6 @@ describe('Comments CRUD', function () {
             })    
             .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
             .end((err, res) => {
-                console.log(res.body)
                 // console.log('API RES',res.body)
                 // if (err) return done(err);
                 done();
@@ -45,7 +41,6 @@ describe('Comments CRUD', function () {
             })    
             .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
             .end((err, res) => {
-                console.log(res.body)
                 // console.log('API RES',res.body)
                 // if (err) return done(err);
                 done();
@@ -61,7 +56,6 @@ describe('Comments CRUD', function () {
             })    
             .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
             .end((err, res) => {
-                console.log( res.body)
                 // console.log('API RES',res.body)
                 // if (err) return done(err);
                 done();

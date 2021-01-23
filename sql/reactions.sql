@@ -1,7 +1,7 @@
-CREATE TABLE `reactions` (
+CREATE TABLE `ratings` (
   `uId` int NOT NULL,
   `cId` int NOT NULL,
-  `reactions` varchar(45) DEFAULT NULL,
+  `ratings` int DEFAULT NULL,
   KEY `User Id_idx` (`uId`) /*!80000 INVISIBLE */,
   KEY `Comment Id_idx` (`cId`),
   CONSTRAINT `Comment Id` FOREIGN KEY (`cId`) REFERENCES `comments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,

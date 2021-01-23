@@ -1,4 +1,5 @@
 const MovicesService = require("../services/MovicesService");
+const { createCtx } = require("../utils/context");
 
 /** The main movies controller */
 class MoviesController {
@@ -22,8 +23,8 @@ class MoviesController {
      * @param {Express.Response} res 
      */
     getMovieById(req,res) {
-        const mId = req.params['mId']
-        MovicesService.findById(mId).then((data)=>{
+        const ctx = createCtx(req)
+        MovicesService.findById(ctx).then((data)=>{
             res.status(200).send(data)
         }).catch((error)=>{
             console.error('error',error)

@@ -56,7 +56,7 @@ describe('Movies CRUD', function() {
         .set('Authorization', auth.token)
         .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
         .end((err, res) => {
-            // console.log('MOVIE BY ID',res.body)
+            console.log('MOVIE BY ID',res.body)
             // console.log('API RES',res.body)
             // if (err) return done(err);
             done();
@@ -70,7 +70,6 @@ describe('Movies CRUD', function() {
         .set('Authorization', auth.token)
         .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
         .end((err, res) => {
-            console.log('MOVIE BY TITLE',res.body)
             // console.log('API RES',res.body)
             // if (err) return done(err);
             done();
