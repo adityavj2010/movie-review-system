@@ -13,7 +13,7 @@ describe('Comments CRUD', function () {
             .set('Authorization', auth.token)
             .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
             .end((err, res) => {
-                console.log('Get Movies Response', res.body)
+                console.log(res.body)
                 // console.log('API RES',res.body)
                 // if (err) return done(err);
                 done();
@@ -30,7 +30,7 @@ describe('Comments CRUD', function () {
             })    
             .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
             .end((err, res) => {
-                console.log('Get Movies Response', res.body)
+                console.log(res.body)
                 // console.log('API RES',res.body)
                 // if (err) return done(err);
                 done();
@@ -45,28 +45,12 @@ describe('Comments CRUD', function () {
             })    
             .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
             .end((err, res) => {
-                console.log('Get Movies Response', res.body)
+                console.log(res.body)
                 // console.log('API RES',res.body)
                 // if (err) return done(err);
                 done();
             });
     });
-    it('Should not create comment', (done) => {
-        request(app)
-            .post('/movies/1/comments')
-            .set('Accept', 'application/json')
-            .set('Authorization', auth.token)
-            .send({
-            })    
-            .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
-            .end((err, res) => {
-                console.log('Get Movies Response', res.body)
-                // console.log('API RES',res.body)
-                // if (err) return done(err);
-                done();
-            });
-    });
-
     it('Should update comment', (done) => {
         request(app)
             .put('/movies/1/comments/1')
@@ -77,7 +61,7 @@ describe('Comments CRUD', function () {
             })    
             .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
             .end((err, res) => {
-                console.log('Get Movies Response', res.body)
+                console.log( res.body)
                 // console.log('API RES',res.body)
                 // if (err) return done(err);
                 done();

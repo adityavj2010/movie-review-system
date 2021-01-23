@@ -13,7 +13,6 @@ class DBBase {
         let keyString = `(${Object.keys(model).join(' ,')})`;
         let values = Object.values(model);
         let statement=`INSERT INTO ${this.tableName} ${keyString} VALUES ?`;
-        console.log('STATMENT',statement)
         return this.writeQuery(statement,[[values]])
     }
 
@@ -41,8 +40,9 @@ class DBBase {
         return this.writeQuery(statement,values)
     }
 
-    delete(userId, result) {
-
+    delete(userId) {
+        let statement = `DELETE FROM ${this.tableName} WHERE id=${id}`
+        return this.writeQuery(statement)
     }
 
     readQuery(sql, values) {

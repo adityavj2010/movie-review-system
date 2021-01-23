@@ -51,7 +51,16 @@ class CommentsController {
             console.log('EDIT ERROR',error)
             res.status(500).send({ message: 'Internal Error' });
         })
+    }
 
+    delete(req,res) {
+        const ctx = createCtx(req)
+        commentsService.delete(ctx).then((data)=>{
+            res.status(200).send({message:'Comment Deleted successfully'})
+        }).catch((error) => {
+            console.log('EDIT ERROR',error)
+            res.status(500).send({ message: 'Internal Error' });
+        })
     }
 }
 

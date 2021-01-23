@@ -8,6 +8,7 @@ const authenticate = require('../middleware/authenticate');
 const { commentParam } = require('../validations/comments');
 
 router.get('/auth/me', authenticate, auth.me);
+router.delete('/movies/:mId/comments/:cId',[authenticate],comments.delete)
 router.put('/movies/:mId/comments/:cId',[authenticate,validate(commentParam)],comments.edit)
 router.post('/movies/:mId/comments',[authenticate,validate(commentParam)],comments.create)
 router.get('/movies/:mId/comments',authenticate,comments.get)

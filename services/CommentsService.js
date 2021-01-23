@@ -31,6 +31,17 @@ class CommentsService extends DBBase {
             return this.update(cId,reqBody)
         })
     }
+
+    delete(ctx) {
+        const {reqBody,cId,uId} = ctx
+        return this.findById(ctx.cId).then((comment)=>{
+            if(comment.uId!==uId)
+            {
+                throw "Internal Server Error uId not matching"
+            }
+            return super.delete(cId)
+        })
+    }
 }
 
 module.exports = new CommentsService()
