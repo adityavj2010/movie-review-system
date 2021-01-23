@@ -1,5 +1,6 @@
 const errorParser = (err, req, res, next) => {
     next(err);
+    
     if (err) {
         const status = err.status ? err.status : 400;
         

@@ -9,7 +9,7 @@ const middlewarePathLogger = require('./middleware/PathLogger');
 
 const app = express();
 
-app.use(express.json({type: "application/json"}));
+app.use(express.json({ type: "application/json" }));
 app.use(express.urlencoded({ extended: false }));
 
 // add cors headers
@@ -17,15 +17,24 @@ app.use(cors());
 // comporess output
 app.use(compression());
 
+app.use(express.static(__dirname + '/dist'));
+
+
 // only on debug mode
-if(config.debug){
-    // path logger
-    app.use(middlewarePathLogger);
+if (config.debug) {
+  // path logger
+  app.use(middlewarePathLogger);
 }
 
 // use routes
 
 app.use('/api/', routes);
+
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname + '/dist/index.html'));
+});
+
+
 app.use(middlewareErrorParser);
 
 // Start server
