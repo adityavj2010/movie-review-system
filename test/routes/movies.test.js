@@ -63,6 +63,20 @@ describe('Movies CRUD', function() {
         });
     });
 
+    it('Get movies by name', (done) => {
+        request(app)
+        .get('/movies?title=%s%')
+        .set('Accept', 'application/json')
+        .set('Authorization', auth.token)
+        .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
+        .end((err, res) => {
+            console.log('MOVIE BY TITLE',res.body)
+            // console.log('API RES',res.body)
+            // if (err) return done(err);
+            done();
+        });
+    });
+
 });
 
 

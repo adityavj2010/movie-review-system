@@ -12,8 +12,8 @@ class DBBase {
     insertOne(model) {
         let keyString = `(${Object.keys(model).join(' ,')})`;
         let values = Object.values(model);
-        let statement=`INSERT INTO ${this.tableName} ${keyString} VALUES ?`;
-        return this.writeQuery(statement,[[values]])
+        let statement = `INSERT INTO ${this.tableName} ${keyString} VALUES ?`;
+        return this.writeQuery(statement, [[values]])
     }
 
     findById(id) {
@@ -24,20 +24,27 @@ class DBBase {
         const { limit = 5, offset = 0 } = params;
         delete params.limit
         delete params.offset
-        let sqlAndSection = Object.keys(params).map(param => `${param}=?`).join(' AND ');
+        let sqlAndSection = Object.keys(params).map(param => {
+            let checkType = '='
+            if (typeof params[param]==='string') {
+                checkType = "LIKE"
+            }
+            return `${param} ${checkType} ?`
+        }).join(' AND ');
         let paramsArray = Object.values(params);
         let whereClause = ''
         if (paramsArray.length > 0) {
             whereClause = `where ${sqlAndSection}`
+            console.log('WHERE CLAUSE',sqlAndSection)
         }
         return this.readQuery(`Select * from ${this.tableName} ${whereClause} LIMIT ${limit} OFFSET ${offset}`, paramsArray)
     }
 
     update(id, body) {
-        let keyString = `${Object.keys(body).map((key=>key+'=?')).join(' ,')}`;
+        let keyString = `${Object.keys(body).map((key => key + '=?')).join(' ,')}`;
         let values = Object.values(body);
-        let statement=`UPDATE ${this.tableName} SET ${keyString} WHERE id=${id}`;
-        return this.writeQuery(statement,values)
+        let statement = `UPDATE ${this.tableName} SET ${keyString} WHERE id=${id}`;
+        return this.writeQuery(statement, values)
     }
 
     delete(userId) {
