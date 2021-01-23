@@ -8,8 +8,9 @@ const authenticate = require('../middleware/authenticate');
 const { commentParam } = require('../validations/comments');
 
 router.get('/auth/me', authenticate, auth.me);
-router.post('/movies/:mId/comments',[authenticate,validate(commentParam)],comments.createComment)
-router.get('/movies/:mId/comments',authenticate,comments.getComments)
+router.put('/movies/:mId/comments/:cId',[authenticate,validate(commentParam)],comments.edit)
+router.post('/movies/:mId/comments',[authenticate,validate(commentParam)],comments.create)
+router.get('/movies/:mId/comments',authenticate,comments.get)
 router.get('/movies/:mId',authenticate,movies.getMovieById)
 router.get('/movies',authenticate,movies.getMovies)
 

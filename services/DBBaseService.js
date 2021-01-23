@@ -34,8 +34,11 @@ class DBBase {
         return this.readQuery(`Select * from ${this.tableName} ${whereClause} LIMIT ${limit} OFFSET ${offset}`, paramsArray)
     }
 
-    update(userId, body, result) {
-
+    update(id, body) {
+        let keyString = `${Object.keys(body).map((key=>key+'=?')).join(' ,')}`;
+        let values = Object.values(body);
+        let statement=`UPDATE ${this.tableName} SET ${keyString} WHERE id=${id}`;
+        return this.writeQuery(statement,values)
     }
 
     delete(userId, result) {
