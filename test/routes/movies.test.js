@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../../server.js');
-
+const { loginUser } = require('../shared.js');
 
 describe('Movies CRUD', function() {
     var auth = {};
@@ -13,7 +13,7 @@ describe('Movies CRUD', function() {
         .set('Authorization', auth.token)
         .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
         .end((err, res) => {
-            console.log('Get Movies Response',res.body)
+            // console.log('Get Movies Response',res.body)
             // console.log('API RES',res.body)
             // if (err) return done(err);
             done();
@@ -27,7 +27,7 @@ describe('Movies CRUD', function() {
         .set('Authorization', auth.token)
         .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
         .end((err, res) => {
-            console.log('Get Movies Limited Response',res.body)
+            // console.log('Get Movies Limited Response',res.body)
             // console.log('API RES',res.body)
             // if (err) return done(err);
             done();
@@ -41,7 +41,7 @@ describe('Movies CRUD', function() {
         .set('Authorization', auth.token)
         .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
         .end((err, res) => {
-            console.log('Get Movies Limited Offset Response',res.body)
+            //console.log('Get Movies Limited Offset Response',res.body)
             // console.log('API RES',res.body)
             // if (err) return done(err);
             done();
@@ -56,7 +56,7 @@ describe('Movies CRUD', function() {
         .set('Authorization', auth.token)
         .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
         .end((err, res) => {
-            console.log('MOVIE BY ID',res.body)
+            // console.log('MOVIE BY ID',res.body)
             // console.log('API RES',res.body)
             // if (err) return done(err);
             done();
@@ -66,21 +66,3 @@ describe('Movies CRUD', function() {
 });
 
 
-function loginUser(auth) {
-    
-    return function(done) {
-        request(app)
-            .post('/auth/login')
-            .send({
-                "email":"admin@admin.com",
-                "password": "1234"
-            })
-            .expect(200)
-            .end(onResponse);
-        
-        function onResponse(err, res) {
-            auth.token = 'Bearer ' + res.body.data;
-            return done();
-        }
-    };
-}

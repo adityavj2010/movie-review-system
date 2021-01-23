@@ -2,15 +2,22 @@ const request = require('supertest');
 const app = require('../server.js');
 var token = '';
 
-// before(function(done) {
-//     request(app)
-//       .post('/user/login')
-//       .send({
-//           "email":"admin@admin.com",
-//           "password": "1234"
-//       })
-//       .end(function(err, res) {
-//         token = res.body.token; // Or something
-//         done();
-//       });
-// });
+function loginUser(auth) {
+    return function(done) {
+        request(app)
+            .post('/auth/login')
+            .send({
+                "email":"admin@admin.com",
+                "password": "1234"
+            })
+            .expect(200)
+            .end(onResponse);
+        
+        function onResponse(err, res) {
+            auth.token = 'Bearer ' + res.body.data;
+            return done();
+        }
+    };
+}
+
+module.exports = {loginUser}

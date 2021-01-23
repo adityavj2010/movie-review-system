@@ -9,8 +9,12 @@ class DBBase {
         this.tableName = tableName
     }
 
-    create(body) {
-
+    insertOne(model) {
+        let keyString = `(${Object.keys(model).join(' ,')})`;
+        let values = Object.values(model);
+        let statement=`INSERT INTO ${this.tableName} ${keyString} VALUES ?`;
+        console.log('STATMENT',statement)
+        return this.writeQuery(statement,[[values]])
     }
 
     findById(id) {

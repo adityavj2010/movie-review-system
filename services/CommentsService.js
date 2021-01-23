@@ -5,11 +5,17 @@ class CommentsService extends DBBase {
         super('comments')
     }
 
-    findByMovieId(mId,queryParams){
-        return this.find({mId,...queryParams}).then(data=>{
+    findByMovieId(mId, queryParams) {
+        return this.find({ mId, ...queryParams }).then(data => {
             return {
-                comments:data
+                comments: data
             }
+        })
+    }
+
+    createComment(body) {
+        return this.insertOne(body).then(res => {
+            return { id: res.insertId }
         })
     }
 }
