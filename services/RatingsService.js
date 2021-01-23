@@ -8,7 +8,7 @@ class Ratings extends DBBase {
 
     addRating(ctx) {
         const { reqBody, mId, uId } = ctx;
-        return this.readQuery(`SELECT * FROM ${this.tableName} WHERE mId=${mId} and uId=${uId}"`).then((res) => {
+        return this.readQuery(`SELECT * FROM ${this.tableName} WHERE mId=${mId} and uId=${uId}`).then((res) => {
             if (res.length === 1) {
                 return this.writeQuery(`UPDATE ${this.tableName} SET rating=${Number(reqBody.rating)} WHERE uId=${uId} and mId=${mId}`)
             }
