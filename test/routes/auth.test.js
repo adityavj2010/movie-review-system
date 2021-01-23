@@ -6,7 +6,7 @@ const { loginUser } = require('../shared.js');
 describe('POST /auth/login', function() {
     it('should user login return JSON', (done) => {
         request(app)
-        .post('/auth/login')
+        .post('/api/auth/login')
         .send({
             "email":"admin@admin.com",
     	    "password": "1234"
@@ -22,7 +22,7 @@ describe('POST /auth/login', function() {
     
     it('should user login fail', (done) => {
         request(app)
-        .post('/auth/login')
+        .post('/api/auth/login')
         .send({
             "email":"admin@admin.com",
     	    "password": "wrong"
@@ -42,7 +42,7 @@ describe('GET /auth/me', function() {
    
     it('should return user json', (done) => {
         request(app)
-        .get('/auth/me')
+        .get('/api/auth/me')
         .set('Accept', 'application/json')
         .set('Authorization', auth.token)
         .expect(200)
@@ -54,7 +54,7 @@ describe('GET /auth/me', function() {
     
     it('should require authorization', (done) => {
         request(app)
-        .get('/auth/me')
+        .get('/api/auth/me')
         .set('Accept', 'application/json')
         .expect(401, { error: 'Unauthorized', message: 'Authentication failed (token).' })
         .end((err, res) => {

@@ -8,7 +8,7 @@ describe('Movies CRUD', function() {
 
     it('Should get movies', (done) => {
         request(app)
-        .get('/movies')
+        .get('/api/movies')
         .set('Accept', 'application/json')
         .set('Authorization', auth.token)
         .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
@@ -22,7 +22,7 @@ describe('Movies CRUD', function() {
 
     it('Should get LIMITED movies', (done) => {
         request(app)
-        .get('/movies?limit=2')
+        .get('/api/movies?limit=2')
         .set('Accept', 'application/json')
         .set('Authorization', auth.token)
         .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
@@ -36,7 +36,7 @@ describe('Movies CRUD', function() {
 
     it('Should get LIMITED OFFSET movies', (done) => {
         request(app)
-        .get('/movies?limit=2&offset=3')
+        .get('/api/movies?limit=2&offset=3')
         .set('Accept', 'application/json')
         .set('Authorization', auth.token)
         .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
@@ -51,7 +51,7 @@ describe('Movies CRUD', function() {
 
     it('Get a movie by id', (done) => {
         request(app)
-        .get('/movies/1')
+        .get('/api/movies/1')
         .set('Accept', 'application/json')
         .set('Authorization', auth.token)
         .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
@@ -65,7 +65,7 @@ describe('Movies CRUD', function() {
 
     it('Get movies by name', (done) => {
         request(app)
-        .get('/movies?title=%s%')
+        .get('/api/movies?title=%s%')
         .set('Accept', 'application/json')
         .set('Authorization', auth.token)
         .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })

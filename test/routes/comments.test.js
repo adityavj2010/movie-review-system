@@ -8,7 +8,7 @@ describe('Comments CRUD', function () {
 
     it('Should get comments', (done) => {
         request(app)
-            .get('/movies/1/comments')
+            .get('/api/movies/1/comments')
             .set('Accept', 'application/json')
             .set('Authorization', auth.token)
             .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
@@ -22,7 +22,7 @@ describe('Comments CRUD', function () {
 
     it('Should create comment', (done) => {
         request(app)
-            .post('/movies/1/comments')
+            .post('/api/movies/1/comments')
             .set('Accept', 'application/json')
             .set('Authorization', auth.token)
             .send({
@@ -38,7 +38,7 @@ describe('Comments CRUD', function () {
     });
     it('Should not create comment', (done) => {
         request(app)
-            .post('/movies/1/comments')
+            .post('/api/movies/1/comments')
             .set('Accept', 'application/json')
             .set('Authorization', auth.token)
             .send({
@@ -53,7 +53,7 @@ describe('Comments CRUD', function () {
     });
     it('Should update comment', (done) => {
         request(app)
-            .put('/movies/1/comments/1')
+            .put('/api/movies/1/comments/1')
             .set('Accept', 'application/json')
             .set('Authorization', auth.token)
             .send({

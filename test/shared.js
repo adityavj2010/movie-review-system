@@ -5,7 +5,7 @@ var token = '';
 function loginUser(auth) {
     return function(done) {
         request(app)
-            .post('/auth/login')
+            .post('/api/auth/login')
             .send({
                 "email":"admin@admin.com",
                 "password": "1234"

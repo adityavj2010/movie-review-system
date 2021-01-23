@@ -24,8 +24,8 @@ if(config.debug){
 }
 
 // use routes
-app.use('/', routes);
 
+app.use('/api/', routes);
 app.use(middlewareErrorParser);
 
 // Start server

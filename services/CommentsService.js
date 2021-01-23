@@ -6,37 +6,32 @@ class CommentsService extends DBBase {
     }
 
     findCommentsByMovieId(ctx) {
-        const {mId,queryParams} = ctx;
-        return this.find({ mId, ...queryParams }).then(data => {
-            return {
-                comments: data
-            }
-        })
+        const { mId, queryParams } = ctx;
+        const { limit = 10, offset = 0 } = queryParams;
+        return this.readQuery(`Select comments.id as id,comments.text as text,users.username as username from ${this.tableName} left join users ON users.id=comments.uId WHERE mId=${mId} LIMIT ${limit} OFFSET ${offset}`).then(comments => { return { comments } })
     }
 
     create(ctx) {
-        const {reqBody,mId,uId} = ctx
-        return this.insertOne({...reqBody,mId,uId}).then(res => {
+        const { reqBody, mId, uId } = ctx
+        return this.insertOne({ ...reqBody, mId, uId }).then(res => {
             return { id: res.insertId }
         })
     }
 
     edit(ctx) {
-        const {reqBody,cId,uId} = ctx
-        return this.findById(ctx.cId).then((comment)=>{
-            if(comment.uId!==uId)
-            {
+        const { reqBody, cId, uId } = ctx
+        return this.findById(ctx.cId).then((comment) => {
+            if (comment.uId !== uId) {
                 throw "Internal Server Error uId not matching"
             }
-            return this.update(cId,reqBody)
+            return this.update(cId, reqBody)
         })
     }
 
     delete(ctx) {
-        const {reqBody,cId,uId} = ctx
-        return this.findById(ctx.cId).then((comment)=>{
-            if(comment.uId!==uId)
-            {
+        const { reqBody, cId, uId } = ctx
+        return this.findById(ctx.cId).then((comment) => {
+            if (comment.uId !== uId) {
                 throw "Internal Server Error uId not matching"
             }
             return super.delete(cId)
