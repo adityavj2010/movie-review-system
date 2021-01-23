@@ -24,7 +24,6 @@ const authenticate = (req, res, next) => {
         }
 
     }
-    console.error('no auth token')
     return res.status(401).send({ error: 'Unauthorized', message: 'Authentication failed (token).' });
 }
 

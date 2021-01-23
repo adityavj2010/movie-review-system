@@ -1,4 +1,4 @@
-const { db_read } = require("../config/db")
+const { db_read, db_write } = require("../config/db")
 
 class DBBase {
 
@@ -13,44 +13,21 @@ class DBBase {
 
     }
 
-    findById(userId) {
-        return new Promise((resolve, reject) => {
-
-            db_read.query(`Select * from ${this.tableName} where id = ?`, userId, function (err, res) {
-                if (err) {
-                    console.log("error: ", err);
-                    reject(err, null);
-                } else {
-                    resolve(res[0]);
-                }
-            });
-
-        });
+    findById(id) {
+        return this.readQuery(`Select * from ${this.tableName} where id = ?`, id).then(res => res[0])
     }
 
     find(params = {}) {
         const { limit = 5, offset = 0 } = params;
         delete params.limit
         delete params.offset
-        let sqlAndSection = Object.keys(params).map(param => `'${param}'=?`).join(' AND ');
+        let sqlAndSection = Object.keys(params).map(param => `${param}=?`).join(' AND ');
         let paramsArray = Object.values(params);
         let whereClause = ''
         if (paramsArray.length > 0) {
             whereClause = `where ${sqlAndSection}`
         }
-        return new Promise((resolve, reject) => {
-            db_read.query(`Select * from ${this.tableName} ${whereClause} LIMIT ${limit} OFFSET ${offset}`, paramsArray, function (err, res) {
-                if (err) {
-                    reject(err)
-                } else {
-                    let results = {
-                        movies: res,
-                        moreAvailable: res.length == limit
-                    }
-                    resolve(results)
-                }
-            });
-        })
+        return this.readQuery(`Select * from ${this.tableName} ${whereClause} LIMIT ${limit} OFFSET ${offset}`, paramsArray)
     }
 
     update(userId, body, result) {
@@ -59,6 +36,28 @@ class DBBase {
 
     delete(userId, result) {
 
+    }
+
+    readQuery(sql, values) {
+        return new Promise((resolve, reject) => {
+            db_read.query(sql, values, function (err, res) {
+                if (err) {
+                    reject(err)
+                }
+                resolve(res)
+            })
+        })
+    }
+
+    writeQuery(sql, values) {
+        return new Promise((resolve, reject) => {
+            db_write.query(sql, values, function (err, res) {
+                if (err) {
+                    reject(err)
+                }
+                resolve(res)
+            })
+        })
     }
 
 }
