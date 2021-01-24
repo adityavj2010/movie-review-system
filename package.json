@@ -8,7 +8,9 @@
     "test": "mocha test/**/*.test.js",
     "test-watch": "nodemon --exec 'npm test'",
     "start:prod": "pm2 start server.js -i max",
-    "stop:prod": "pm2 stop all"
+    "stop:prod": "pm2 stop all",
+    "pretest": "eslint --ignore-path .gitignore .",
+    "pretest-fix": "npm run pretest -- --fix"
   },
   "author": "Dainius Gliebus",
   "license": "ISC",
@@ -27,6 +29,8 @@
     "pm2": "^4.5.1"
   },
   "devDependencies": {
+    "eslint": "^7.18.0",
+    "eslint-config-strongloop": "^2.1.0",
     "mocha": "^5.2.0",
     "supertest": "^3.3.0"
   },

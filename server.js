@@ -9,7 +9,7 @@ const middlewarePathLogger = require('./middleware/PathLogger');
 
 const app = express();
 
-app.use(express.json({ type: "application/json" }));
+app.use(express.json({ type: 'application/json' }));
 app.use(express.urlencoded({ extended: false }));
 
 // add cors headers
@@ -30,7 +30,7 @@ if (config.debug) {
 
 app.use('/api/', routes);
 
-app.get('*', function (req, res) {
+app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 

@@ -1,10 +1,10 @@
 'user strict';
 
-const { DBBase } = require("./DBBaseService");
+const { DBBase } = require('./DBBaseService');
 
 class User extends DBBase {
-    constructor() {
-        super('users')
-    }
+  constructor() {
+    super('users');
+  }
 }
 module.exports = new User();
