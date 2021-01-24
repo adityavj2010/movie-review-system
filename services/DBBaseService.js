@@ -47,7 +47,7 @@ class DBBase {
         return this.writeQuery(statement, values)
     }
 
-    delete(userId) {
+    delete(id) {
         let statement = `DELETE FROM ${this.tableName} WHERE id=${id}`
         return this.writeQuery(statement)
     }

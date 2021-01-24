@@ -61,5 +61,17 @@ describe('Comments CRUD', function () {
                 done();
             });
     });
+    it('Should DELETE comment', (done) => {
+        request(app)
+            .delete('/api/movies/1/comments/1')
+            .set('Accept', 'application/json')
+            .set('Authorization', auth.token)
+            .expect(200, { error: 'Unauthorized', message: 'Authentication failed (token).' })
+            .end((err, res) => {
+                // console.log('API RES',res.body)
+                // if (err) return done(err);
+                done();
+            });
+    });
 
 })
